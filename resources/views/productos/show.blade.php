@@ -15,11 +15,26 @@
         <div class="col-sm-8">
 
             {{-- TODO: Datos del producto --}}
-            <p><b>Producto:</b>{{$productos[0]}}</p>
-            <p><b>Categoria:</b>{{$productos[1]}}</p>
+            <p><b>Producto:</b>{{$productos->nombre}}</p>
+            <p><b>Categoria:</b>{{$productos->categoria}}</p>
 
-            <p>Estado: Producto actualmente comprado</p>
-            <a class="btn btn-danger" role="button">Pendiente de compra</a>
+            @if( $productos->pendiente==0 )
+                <p>Estado: Producto sin comprar</p>
+                <a class="btn btn-primary" role="button">Comprar</a>
+                <a class="btn btn-danger" role="button">Pendiente de compra</a>
+                <a class="btn btn-warning" href="{{ url('/productos/edit/' . $productos->id ) }}">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    Editar producto</a>
+
+            @elseif ($productos->pendiente==1)
+                <p>Estado: Producto comprado</p>
+                <a class="btn btn-danger"  role="button">Comprado</a>
+                <a class="btn btn-danger" role="button">Pendiente de compra</a>
+                <a class="btn btn-warning" href="{{ url('/productos/edit/' . $productos->id ) }}">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    Editar producto</a>
+            @endif
+
         </div>
     </div>
 

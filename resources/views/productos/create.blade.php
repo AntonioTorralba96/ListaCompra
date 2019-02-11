@@ -11,7 +11,7 @@
                 <div class="card-body" style="padding:30px">
 
                     {{-- TODO: Abrir el formulario e indicar el método POST --}}
-                    <form method="post" action="javascript:void(0)">
+                    <form method="post" action="{{ url('productos/create/')}}">
 
                         {{-- TODO: Protección contra CSRF --}}
                         @csrf

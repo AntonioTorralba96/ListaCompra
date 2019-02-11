@@ -15,19 +15,42 @@ class ProductoController extends Controller
 
     public function getShow($id)
     {
-        $arrayProductos= Producto::findOrFail($id);
-        return view('productos.show', array('productos'=>$arrayProductos));
+        $producto= Producto::findOrFail($id);
+        return view('productos.show', array('productos'=>$producto));
     }
 
     public function getCreate()
     {
-        return view('productos.create', array('createProductos'=>$this->arrayProductos));
+        return view('productos.create');
+    }
+
+    public function postCreate(Request $request)
+    {
+        $producto = new Producto();
+        $producto->nombre = $request->nombre;
+        $producto->precio = $request->precio;
+        $producto->categoria = $request->categoria;
+        $producto->imagen = $request->imagen;
+        $producto->save();
+        return redirect('/productos');
     }
 
     public function getEdit($id)
     {
         $arrayProductos= Producto::findOrFail($id);
         return view('productos.edit', array('editProductos'=>$arrayProductos));
+    }
+
+    public function putEdit(Request $request, $id)
+    {
+        $producto = Producto::findOrFail($id);
+        $producto->nombre = $request->nombre;
+        $producto->precio = $request->precio;
+        $producto->categoria = $request->categoria;
+        $producto->imagen = $request->imagen;
+        $producto->save();
+        return redirect('productos/show/' . $producto->id);
+
     }
 
 }

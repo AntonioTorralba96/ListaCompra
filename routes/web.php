@@ -10,10 +10,27 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['middleware' => 'auth'],function (){
+    Route::get('/', 'HomeController@getHome');
+    Route::group(['prefix' => 'productos'], function(){
 
-Route::get('/', 'HomeController@getHome');
+        Route::get('/', 'ProductoController@getIndex');
 
-Route::get('login', function () {
+        Route::get('show/{id}', 'ProductoController@getShow');
+
+        Route::get('create', 'ProductoController@getCreate');
+
+        Route::post('create', 'ProductoController@postCreate');
+
+        Route::get('edit/{id}', 'ProductoController@getEdit');
+
+        Route::put('edit/{id}', 'ProductoController@putEdit');
+    });
+});
+
+
+
+/*Route::get('login', function () {
     return view('auth.login');
 
 });
@@ -21,12 +38,10 @@ Route::get('login', function () {
 Route::get('logout', function () {
     return view('logout');
 
-});
+});*/
 
-Route::get('productos', 'ProductoController@getIndex');
 
-Route::get('productos/show/{id}', 'ProductoController@getShow');
 
-Route::get('productos/create', 'ProductoController@getCreate');
+Auth::routes();
 
-Route::get('productos/edit/{id}', 'ProductoController@getEdit');
+Route::get('/home', 'HomeController@index')->name('home');

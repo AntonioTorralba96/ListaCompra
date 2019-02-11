@@ -11,25 +11,25 @@
                 <div class="card-body" style="padding:30px">
 
                     {{-- TODO: Abrir el formulario e indicar el método POST --}}
-                    <form method="post" action="javascript:void(0)">
+                    <form method="post" action="{{ url('productos/edit/' . $editProductos->id) }}">
                         {{method_field('PUT')}}
                     {{-- TODO: Protección contra CSRF --}}
                         @csrf
                     <div class="form-group">
                         <label for="title">Nombre</label>
-                        <input type="text" name="nombre" id="title" class="form-control">
+                        <input type="text" name="nombre" value="{{ $editProductos->nombre }}" id="title" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="title">Precio</label>
-                        <input type="number" name="precio" id="title" class="form-control">
+                        <input type="number" name="precio" value="{{ $editProductos->precio }}" id="title" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="title">Categoría</label>
-                        <input type="text" name="categoria" id="title" class="form-control">
+                        <input type="text" name="categoria" value="{{ $editProductos->categoria }}" id="title" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="title">Imagen</label>
-                        <input type="text" name="imagen" id="title" class="form-control">
+                        <input type="text" name="imagen" value="{{ $editProductos->imagen }}" id="title" class="form-control">
                     </div>
 
                     <div class="form-group text-center">

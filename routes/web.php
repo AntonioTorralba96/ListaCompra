@@ -25,6 +25,8 @@ Route::group(['middleware' => 'auth'],function (){
         Route::get('edit/{id}', 'ProductoController@getEdit');
 
         Route::put('edit/{id}', 'ProductoController@putEdit');
+
+        Route::put('buy/{id}', 'ProductoController@changeBuy');
     });
 });
 

@@ -18,22 +18,31 @@
             <p><b>Producto:</b>{{$productos->nombre}}</p>
             <p><b>Categoria:</b>{{$productos->categoria}}</p>
 
-            @if( $productos->pendiente==0 )
-                <p>Estado: Producto sin comprar</p>
-                <a class="btn btn-primary" role="button">Comprar</a>
-                <a class="btn btn-danger" role="button">Pendiente de compra</a>
-                <a class="btn btn-warning" href="{{ url('/productos/edit/' . $productos->id ) }}">
-                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                    Editar producto</a>
+            @if($productos->pendiente==0)
+                Producto sin comprar.
+                @php
+                    $class = "btn btn-danger";
+                    $texto = "Comprar";
+                @endphp
+            @else
 
-            @elseif ($productos->pendiente==1)
-                <p>Estado: Producto comprado</p>
-                <a class="btn btn-danger"  role="button">Comprado</a>
-                <a class="btn btn-danger" role="button">Pendiente de compra</a>
-                <a class="btn btn-warning" href="{{ url('/productos/edit/' . $productos->id ) }}">
-                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                    Editar producto</a>
+                Producto actualmente comprado.
+                @php
+                    $class = "btn btn-success";
+                    $texto = "Devolver";
+                @endphp
             @endif
+
+            <form action="{{ url('productos/buy/' . $productos->id) }}" method="POST">
+                {{ method_field('PUT') }}
+                @csrf
+                <input type="submit" class="{{$class}}" value="{{$texto}}"/>
+            </form>
+
+            <a class="btn btn-warning" href="{{ url('/productos/edit/' . $productos->id ) }}">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                Editar producto</a>
+            <a class="btn btn-outline-info" href="{{ action('ProductoController@getIndex') }}">Volver al listado</a>
 
         </div>
     </div>

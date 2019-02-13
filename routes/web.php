@@ -12,9 +12,8 @@
 */
 Route::group(['middleware' => 'auth'],function (){
     Route::get('/', 'HomeController@getHome');
+    Route::get('/', 'ProductoController@getIndex');
     Route::group(['prefix' => 'productos'], function(){
-
-        Route::get('/', 'ProductoController@getIndex');
 
         Route::get('show/{id}', 'ProductoController@getShow');
 
@@ -27,6 +26,8 @@ Route::group(['middleware' => 'auth'],function (){
         Route::put('edit/{id}', 'ProductoController@putEdit');
 
         Route::put('buy/{id}', 'ProductoController@changeBuy');
+
+        Route::get('/{categorias?}', 'ProductoController@getCategoria');
     });
 });
 

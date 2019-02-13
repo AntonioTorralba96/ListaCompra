@@ -9,8 +9,6 @@
             {{-- TODO: Imagen genérica de los productos --}}
             <img src="https://picsum.photos/200/300/?random" class="img-fluid"/><br><br>
 
-            <button type="button" class="btn btn-dark"><i class="fas fa-arrow-left"></i>Insertar Imagen</button>
-
         </div>
         <div class="col-sm-8">
 

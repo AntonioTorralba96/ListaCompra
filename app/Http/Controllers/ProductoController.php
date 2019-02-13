@@ -52,7 +52,7 @@ class ProductoController extends Controller
         return redirect('productos/show/' . $producto->id);
 
     }
-    
+
     public function changeBuy($id)
     {
         $producto = Producto::findOrFail($id);
@@ -60,7 +60,17 @@ class ProductoController extends Controller
         $producto->save();
         return back();
     }
+    public function getCategoria($categorias=null)
+    {
+        if ($categorias){
+            $arrayProductos= Producto::select('nombre', 'id')->where('categoria', $categorias)->get();
+            return view('productos.categorias2', array('categoria'=> $arrayProductos));
 
+        }else{
+            $arrayProductos= Producto::select('categoria')->distinct()->get();
+            return view('productos.categorias', array('categoria'=> $arrayProductos));
+        }
+    }
 
 }
 
